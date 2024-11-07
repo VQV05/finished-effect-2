@@ -1,120 +1,186 @@
-@import url(https://fonts.googleapis.com/css?family=Lato:300italic);
-
-html,
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+p {
+  margin: 0 0;
+  position: absolute;
+  font: 16px Verdana;
+  color: #eee;
+  height: 25px;
+  top: calc(100vh - 30px);
+  text-shadow: 0 0 2px white;
+}
+p a {
+  text-decoration: none;
+  color: #aaa;
+}
+span {
+  font-size: 11px;
+}
+p > a:first-of-type {
+  font-size: 20px;
+}
 body {
-  width: 100%;
+  overflow: hidden;
+}
+body {
+  background-color: black;
+}
+#sky {
   height: 100%;
 }
-
-body {
-  background: #dc9aed;
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 2px;
+  background: white;
 }
 
-#cake {
-  display: block;
-  position: relative;
-  margin: -10em auto 0 auto;
-}
 
-/* ============================================== Candle
-*/
-
-.velas {
-  background: #f68f8f;
+.container {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 1em;
+  width: 300px; /* Điều chỉnh chiều rộng tùy ý */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  background-color: transparent;
   border-radius: 10px;
-  position: absolute;
-  top: 228px;
-  left: 50%;
-  margin-left: -2.4px;
-  margin-top: -8.33333333px;
-  width: 5px;
-  height: 35px;
-  transform: translateY(-300px);
-  backface-visibility: hidden;
-  animation: in 500ms 6s ease-out forwards;
+  text-align: center; /* Căn giữa theo chiều ngang */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Căn giữa nội dung theo chiều ngang */
+  justify-content: center; /* Căn giữa nội dung theo chiều dọc */
+  z-index: 10;
 }
-.velas:after,
-.velas:before {
-  background: rgba(28, 61, 119, 0.4);
+
+
+.wrap-btn2 {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  width: 7em;
+  height: 2.5em;
+  padding: 0.15em;
+  border: 0.1em solid #fff;
+  border-radius: 0.3em;
+  position: relative;
+}
+
+.wrap-btn2::after {
   content: "";
+  background-color: #fff;
+  width: 0.1em;
+  height: 0.6em;
   position: absolute;
+  right: -0.35em;
+}
+
+.btn2 {
+  border-radius: 0.25em;
   width: 100%;
-  height: 2.22222222px;
-}
-.velas:after {
-  top: 25%;
-  left: 0;
-}
-.velas:before {
-  top: 45%;
-  left: 0;
+  height: 100%;
+  background: linear-gradient(to right, #f00 12%, transparent 12%);
+  box-shadow: none;
+  position: relative;
+  overflow: hidden;
 }
 
-/* ============================================== Fire
-*/
-
-.fuego {
-  border-radius: 100%;
-  position: absolute;
-  top: -20px;
-  left: 50%;
-  margin-left: -2.6px;
-  width: 6.66666667px;
-  height: 18px;
-}
-.fuego:nth-child(1) {
-  animation: fuego 2s 6.5s infinite;
-}
-.fuego:nth-child(2) {
-  animation: fuego 1.5s 6.5s infinite;
-}
-.fuego:nth-child(3) {
-  animation: fuego 1s 6.5s infinite;
-}
-.fuego:nth-child(4) {
-  animation: fuego 0.5s 6.5s infinite;
-}
-.fuego:nth-child(5) {
-  animation: fuego 0.2s 6.5s infinite;
+.btn2:hover {
+  background: linear-gradient(to right, #f00 10%, #222 10%);
+  animation: blink 2s infinite;
 }
 
-/* ============================================== Animation Fire
-*/
-
-@keyframes fuego {
-  0%, 100% {
-    background: rgba(254, 248, 97, 0.5);
-    box-shadow: 0 0 40px 10px rgba(66, 147, 240, 0.2);
-    transform: translateY(0) scale(1);
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0;
   }
   50% {
-    background: rgba(255, 50, 0, 0.1);
-    box-shadow: 0 0 40px 20px rgba(248, 233, 209, 0.2);
-    transform: translateY(-20px) scale(0);
+    opacity: 1;
+  }
+  75% {
+    opacity: 0;
   }
 }
 
-@keyframes in {
-  to {
-    transform: translateY(0);
+.btn2::before {
+  content: "charge now!";
+  border-radius: none;
+  position: absolute;
+  color: #fff;
+  top: 25%;
+  left: 25%;
+  opacity: 0;
+  z-index: 1;
+}
+
+.btn2:hover::after {
+  display: none;
+}
+
+.btn2:hover::before {
+  opacity: 1;
+}
+
+.btn2::after {
+  content: "";
+  border-radius: none;
+  width: 100%;
+  height: 100%;
+  background-color: #0f3;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  animation: charge 3s linear forwards;
+  display: none;
+  z-index: -1;
+}
+h3{
+  color: white;
+}
+
+@keyframes charge {
+  0%{
+    right: 100%;
+  }
+  100%{
+    right: 0%;
   }
 }
 
-.text {
-  color: #eae7e7;
-  font-family: 'Lato', sans-serif;
-  font-size: 40px;
-  font-weight: 300;
-  font-style:italic;
-  text-align: center;
-  h1 {
-    font-size: 1.4em;
-  }
-  
-  p {
-     font-family: 'Lato', sans-serif;
-    font-size: 40px;
-     font-weight: 600;
-    color: #50a9f3;
-  }
+.btn2 ion-icon.flash {
+  font-size: 2em;
+  margin-left: 0.5em;
+  color: #fff;
+  opacity: 0;
+  z-index: 3;
+}
+
+.btn2:active {
+  background: #222;
+  z-index: -2;
+}
+
+.btn2:active::after {
+  display: block;
+}
+
+.btn2:active ion-icon.flash {
+  opacity: 1;
+}
+
+.btn2:active::before {
+  display: none;
+}
+
+.btn2:active:hover {
+  animation: none;
 }
